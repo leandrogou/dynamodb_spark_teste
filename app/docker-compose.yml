@@ -1,0 +1,25 @@
+# Docker compose comentado - usando Spark em modo local[*] direto na app Spring Boot
+# Se precisar de Spark cluster no futuro, descomente abaixo
+
+#version: "3.8"
+#services:
+#  spark-master:
+#    build: ./spark
+#    container_name: spark-master
+#    ports:
+#      - "7077:7077"
+#      - "8080:8080"
+#    environment:
+#      - JAVA_TOOL_OPTIONS=--add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/sun.security.action=ALL-UNNAMED
+#    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master", "--host", "spark-master"]
+#
+#  spark-worker:
+#    build: ./spark
+#    container_name: spark-worker
+#    depends_on:
+#      - spark-master
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      - JAVA_TOOL_OPTIONS=--add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/sun.security.action=ALL-UNNAMED
+#    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077"]
